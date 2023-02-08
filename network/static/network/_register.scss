@@ -1,0 +1,88 @@
+.register-form{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    top: 100px;
+    background-color: white;
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.register-section{
+    background-color: #f3f2ef;
+    height: 94vh;
+}
+
+.reg-submit{
+    all: unset;
+    background-color: $main-color;
+    border-radius: 2px;
+    cursor: pointer; 
+    font-size: 25px;
+    text-align: center;
+    height: 48px;
+    border-radius: 28px;
+    margin-top: 12px;   
+    width: 100%;
+    color: white;
+    border: 0;
+    
+    &:hover{
+        background-color: darken($color: $main-color, $amount: 5);
+    }
+
+}
+
+.reg-username, .reg-email, .reg-password, .reg-pass-conf {
+    margin: 3px;
+    width: 100%;
+    height: 48px;
+    line-height: 24px;
+    padding: 4px 14px 4px;
+    border: solid 1px;
+    z-index: 0;
+    
+    &:focus {
+            outline: solid 2px;
+            outline-color: $main-color;
+           
+            border-color: $main-color;
+        }
+}
+
+.reg-question{
+    font-weight: bold;
+}
+
+
+.container-reg-password, .container-reg-password-conf {
+    position: relative;
+}
+
+
+.reg-show-pass, .reg-show-conf-pass{
+    all: unset;
+    position: absolute;
+    padding: 5px;
+    left: 75%;
+    top: 28%;
+    border: 0;
+    color: rgba(0,0,0,0.6);
+    z-index: 1;
+    font-weight: 600;
+    font-size: smaller;
+    background-color: rgba(0,0,0,0);
+    transition: 0.1s ease-in;
+    &:focus {
+        outline: none;
+    }
+    &:hover{
+        background-color: $main-bg-color;
+        cursor:pointer;
+    }
+}
+

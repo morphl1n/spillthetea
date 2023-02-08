@@ -1,0 +1,99 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block script %}
+<script src="{% static 'network/index.js' %}"></script> 
+{% endblock %}
+
+{% block body %}
+    {%if user.is_authenticated%}
+
+    <div class="all-posts-container">
+
+        <h4> User: {{profileUser}} </h4> 
+        <h3> Followers: {{followerCount}} </h3>
+        <h3> Following: {{followingCount}} </h3>
+        
+        {% if profileUser != request.user %}
+        {% if follows %}
+        <form action="{% url 'unfollow' followreceiver=profileUser %}" method="POST"> 
+            {% csrf_token %}
+            <input type="submit" value="Unfollow">
+        </form>
+        {% else %}
+        <form action="{% url 'follow' followreceiver=profileUser %}" method="POST"> 
+            {% csrf_token %}
+            <input type="submit" value="Follow">
+        </form>
+        {% endif %}
+
+        {% endif %}
+
+
+        {% for post in page_obj %}
+        <div class="post-container"> 
+            <img class="post-pic" src="{{post.creator.profilePicture.url}}">
+            <h4 class="post-creator"> <a href="{% url 'profile' username=post.creator %}"> {{post.creator}} </a></h4>
+            <h6 class="post-date"> {{post.timestamp}}</h6>
+            <p id="index-content" class ="post-content"> {{post.content}} </p>
+            {% if post.creator == request.user %}
+            <button class="edit-button" id="index-edit" data-variable="{{post.id}}" onclick="editHandler(event)">
+              <svg class="edit-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.2594 3.60022L5.04936 12.2902C4.73936 12.6202 4.43936 13.2702 4.37936 13.7202L4.00936 16.9602C3.87936 18.1302 4.71936 18.9302 5.87936 18.7302L9.09936 18.1802C9.54936 18.1002 10.1794 17.7702 10.4894 17.4302L18.6994 8.74022C20.1194 7.24022 20.7594 5.53022 18.5494 3.44022C16.3494 1.37022 14.6794 2.10022 13.2594 3.60022Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path opacity="0.4" d="M11.8906 5.0498C12.3206 7.8098 14.5606 9.9198 17.3406 10.1998" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path opacity="0.4" d="M3 22H21" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+
+            {% endif %}
+            {% if post.id in postList%}
+     
+              <button class="bttn-unlike-{{post.id}}" onclick="unLikeHandler(event, {{ post.id }})" data-id="{{post.id}}">
+                <svg class="unlike-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                  <g id="SVGRepo_iconCarrier"> <path opacity="0.4" d="M18 18.86H17.24C16.44 18.86 15.68 19.17 15.12 19.73L13.41 21.42C12.63 22.19 11.36 22.19 10.58 21.42L8.87 19.73C8.31 19.17 7.54 18.86 6.75 18.86H6C4.34 18.86 3 17.53 3 15.89V4.97998C3 3.33998 4.34 2.01001 6 2.01001H18C19.66 2.01001 21 3.33998 21 4.97998V15.89C21 17.52 19.66 18.86 18 18.86Z" fill="#0a66c2"/> <path d="M16.5805 9.56998C16.3905 9.29998 16.0705 9.15 15.6905 9.15H13.7405C13.6105 9.15 13.4905 9.09998 13.4105 8.99998C13.3305 8.89998 13.2905 8.76998 13.3105 8.62998L13.5505 7.06998C13.6505 6.60998 13.3405 6.07997 12.8805 5.92997C12.4505 5.76997 11.9405 5.98995 11.7405 6.28995L9.80048 9.16996V8.80997C9.80048 8.10997 9.50047 7.81998 8.76047 7.81998H8.27048C7.53048 7.81998 7.23047 8.10997 7.23047 8.80997V13.59C7.23047 14.29 7.53048 14.58 8.27048 14.58H8.76047C9.46047 14.58 9.76047 14.31 9.79047 13.67L11.2605 14.8C11.4605 15 11.9105 15.11 12.2305 15.11H14.0805C14.7205 15.11 15.3605 14.63 15.5005 14.04L16.6705 10.48C16.8005 10.16 16.7705 9.82998 16.5805 9.56998Z" fill="#0a66c2"/> </g>
+                  </svg> {{post.likedPost.all|length}} </button>
+              <button style = "display: none;" class="bttn-like-{{post.id}}" onclick="likeHandler(event, {{ post.id }})" data-id="{{post.id}}">
+                <svg class="like-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path opacity="0.4" d="M18 18.86H17.24C16.44 18.86 15.68 19.17 15.12 19.73L13.41 21.42C12.63 22.19 11.36 22.19 10.58 21.42L8.87 19.73C8.31 19.17 7.54 18.86 6.75 18.86H6C4.34 18.86 3 17.53 3 15.89V4.97998C3 3.33998 4.34 2.01001 6 2.01001H18C19.66 2.01001 21 3.33998 21 4.97998V15.89C21 17.52 19.66 18.86 18 18.86Z" fill="#292D32"/>
+                  <path d="M16.5805 9.56998C16.3905 9.29998 16.0705 9.15 15.6905 9.15H13.7405C13.6105 9.15 13.4905 9.09998 13.4105 8.99998C13.3305 8.89998 13.2905 8.76998 13.3105 8.62998L13.5505 7.06998C13.6505 6.60998 13.3405 6.07997 12.8805 5.92997C12.4505 5.76997 11.9405 5.98995 11.7405 6.28995L9.80048 9.16996V8.80997C9.80048 8.10997 9.50047 7.81998 8.76047 7.81998H8.27048C7.53048 7.81998 7.23047 8.10997 7.23047 8.80997V13.59C7.23047 14.29 7.53048 14.58 8.27048 14.58H8.76047C9.46047 14.58 9.76047 14.31 9.79047 13.67L11.2605 14.8C11.4605 15 11.9105 15.11 12.2305 15.11H14.0805C14.7205 15.11 15.3605 14.63 15.5005 14.04L16.6705 10.48C16.8005 10.16 16.7705 9.82998 16.5805 9.56998Z" fill="#292D32"/>
+                  </svg> {{post.likedPost.all|length}} </button>
+              {% else %}
+              <button class="bttn-like-{{post.id}}" onclick="likeHandler(event, {{ post.id }})" data-id="{{post.id}}">
+                <svg class="like-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path opacity="0.4" d="M18 18.86H17.24C16.44 18.86 15.68 19.17 15.12 19.73L13.41 21.42C12.63 22.19 11.36 22.19 10.58 21.42L8.87 19.73C8.31 19.17 7.54 18.86 6.75 18.86H6C4.34 18.86 3 17.53 3 15.89V4.97998C3 3.33998 4.34 2.01001 6 2.01001H18C19.66 2.01001 21 3.33998 21 4.97998V15.89C21 17.52 19.66 18.86 18 18.86Z" fill="#292D32"/>
+                  <path d="M16.5805 9.56998C16.3905 9.29998 16.0705 9.15 15.6905 9.15H13.7405C13.6105 9.15 13.4905 9.09998 13.4105 8.99998C13.3305 8.89998 13.2905 8.76998 13.3105 8.62998L13.5505 7.06998C13.6505 6.60998 13.3405 6.07997 12.8805 5.92997C12.4505 5.76997 11.9405 5.98995 11.7405 6.28995L9.80048 9.16996V8.80997C9.80048 8.10997 9.50047 7.81998 8.76047 7.81998H8.27048C7.53048 7.81998 7.23047 8.10997 7.23047 8.80997V13.59C7.23047 14.29 7.53048 14.58 8.27048 14.58H8.76047C9.46047 14.58 9.76047 14.31 9.79047 13.67L11.2605 14.8C11.4605 15 11.9105 15.11 12.2305 15.11H14.0805C14.7205 15.11 15.3605 14.63 15.5005 14.04L16.6705 10.48C16.8005 10.16 16.7705 9.82998 16.5805 9.56998Z" fill="#292D32"/>
+                  </svg> {{post.likedPost.all|length}} </button>
+              <button  style = "display: none;" class="bttn-unlike-{{post.id}}" onclick="unLikeHandler(event, {{ post.id }})" data-id="{{post.id}}"> 
+                <svg class="unlike-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                  <g id="SVGRepo_iconCarrier"> <path opacity="0.4" d="M18 18.86H17.24C16.44 18.86 15.68 19.17 15.12 19.73L13.41 21.42C12.63 22.19 11.36 22.19 10.58 21.42L8.87 19.73C8.31 19.17 7.54 18.86 6.75 18.86H6C4.34 18.86 3 17.53 3 15.89V4.97998C3 3.33998 4.34 2.01001 6 2.01001H18C19.66 2.01001 21 3.33998 21 4.97998V15.89C21 17.52 19.66 18.86 18 18.86Z" fill="#0a66c2"/> <path d="M16.5805 9.56998C16.3905 9.29998 16.0705 9.15 15.6905 9.15H13.7405C13.6105 9.15 13.4905 9.09998 13.4105 8.99998C13.3305 8.89998 13.2905 8.76998 13.3105 8.62998L13.5505 7.06998C13.6505 6.60998 13.3405 6.07997 12.8805 5.92997C12.4505 5.76997 11.9405 5.98995 11.7405 6.28995L9.80048 9.16996V8.80997C9.80048 8.10997 9.50047 7.81998 8.76047 7.81998H8.27048C7.53048 7.81998 7.23047 8.10997 7.23047 8.80997V13.59C7.23047 14.29 7.53048 14.58 8.27048 14.58H8.76047C9.46047 14.58 9.76047 14.31 9.79047 13.67L11.2605 14.8C11.4605 15 11.9105 15.11 12.2305 15.11H14.0805C14.7205 15.11 15.3605 14.63 15.5005 14.04L16.6705 10.48C16.8005 10.16 16.7705 9.82998 16.5805 9.56998Z" fill="#0a66c2"/> </g>
+                  </svg> {{post.likedPost.all|length}} </button>
+   
+            {%endif%}
+          </div>
+        {% endfor %}
+
+
+    </div>
+
+    <nav class="pag-nav">
+      <ul class="pagination">
+          {% if page_obj.has_previous %}
+        <li class="page-item-prev"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+          {% endif %}
+          {% if page_obj.has_next %}
+        <li class="page-item-next"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+          {% endif %}
+      </ul>
+    </nav>
+
+
+
+    
+    
+    
+    {% endif %}
+{% endblock %}

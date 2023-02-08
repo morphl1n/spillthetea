@@ -1,0 +1,150 @@
+.all-posts-container{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    
+   
+    
+}
+
+.post-container{
+    position: relative;
+    width: $post-width;
+    border: transparent 0.5px;
+    border-color: black;
+    margin-top: 20px;
+    background-color: white;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.19), 0px 6px 6px rgba(0,0,0,0.23);
+    border-radius: 8px;
+   
+}
+
+.post-creator{
+    position: absolute;
+    left: 73px;
+    font-size: 1rem;
+    top: calc(30px - 1rem);
+
+    a{
+        color: black;
+        text-decoration: none;
+        &:active{
+            color: inherit;
+        }
+    }
+}
+
+.post-date{
+    position: absolute;
+    font-size: 0.62rem;
+    color: gray;
+    left: 73px;
+    top: 42px;
+}
+
+.post-content{
+    position: relative;
+    left: 6%;
+    margin-top: 2px;
+    width: 88%;
+    padding: 5px;
+    border-radius: 18px;
+}
+
+
+
+.post-pic{
+    position: relative;
+    margin-top: 5px;
+    margin-left: 5px;
+    width: 60px;
+    height: 60px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;   
+}
+
+ .edit-button{
+    all:unset;
+
+    position: absolute;
+    padding: 5px;
+    left: calc(100% - 30px - 5px);
+    right: 0;
+    top: 0;
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.edit-icon{
+    width: 25px;
+    height: 25px;
+    pointer-events: none;
+   
+
+}
+
+[class*="bttn-unlike"], [class*="bttn-like"] {
+    all: unset;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    &:hover{
+        cursor: pointer;
+    }
+    
+}
+
+.like-icon, .unlike-icon{
+    height: 50px;
+    width: 50px;
+}
+
+.addpost-container{
+    position: relative;
+}
+
+.addpost-textarea{
+    position: relative;
+    padding: 10px;
+    height: 100px;
+    width: $post-width;
+    margin-bottom: 75px;
+    background-color: white;
+    resize: none;
+    border-radius: 18px;
+    &:focus{
+        outline-color: $main-color;
+    }
+  
+}
+
+.addpost-button{
+    width: 70px;
+    height: 35px;
+    position: absolute;
+    left: calc(100% - 70px);
+    top: calc(100% - 50px - 18px);
+    color: white;
+    background-color: $main-color;
+    transition: all 0.3s;
+    border: none;
+    &:hover{
+        cursor: pointer;
+        background-color: lighten($main-color, 20%);
+    }
+    
+}
+
+.edit-textarea:focus{
+    outline-color: $main-color;
+}
+
+.profFormButtons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}

@@ -1,0 +1,27 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<div class="profileContainer"> 
+    <div class="profImgCont">
+    <img class="profileImage" src="{{request.user.profilePicture.url}}">
+    </div>
+
+    
+    <div class="profileForm">
+        <h1> Change Profile Picture: </h1>
+    <div class="profFormButtons"> 
+    <form action="{% url 'editProfile' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="choose-file"> <span class="chooseFile">Choose File</span> 
+            <input type="file" id="choose-file" class="profPicButton" name="newProfPic"> 
+        </label>
+        <input type="submit" class="profPicSubmit" value="Submit">
+    </form>
+    </div>
+    </div>
+
+</div>
+{% endblock %}
+

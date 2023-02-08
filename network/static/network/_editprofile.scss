@@ -1,0 +1,59 @@
+.profileContainer{
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    
+}
+
+.profImgCont{
+    margin-top: 150px;
+    margin-left: 50%;
+    margin-right: 20px;
+
+    img{
+        width: 150px;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+    }
+}
+
+.profileForm{
+    margin-top: 150px;
+    margin-right: 450px;
+    display: flex;
+    flex-direction: column;
+    h1{
+        margin-bottom: 10px;
+    }
+  
+}
+
+.profPicButton{
+    display: none;
+}
+
+.chooseFile{
+    padding: 8px;
+    color: white;
+    background-color: $main-color;
+    transition: all 0.3s;
+    border: none;
+    &:hover{
+        cursor: pointer;
+        background-color: lighten($main-color, 20%);
+    }
+    
+}
+
+.profPicSubmit{
+    all:unset;
+    padding: 8px;
+    color: white;
+    background-color: $main-color;
+    transition: all 0.3s;
+    border: none;
+    &:hover{
+        cursor: pointer;
+        background-color: lighten($main-color, 20%);
+    }
+}
