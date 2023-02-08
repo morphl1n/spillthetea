@@ -8,28 +8,29 @@
 {% block body %}
     {%if user.is_authenticated%}
 
+
+    <div class="profile-info-container"> 
+      <h4> User: {{profileUser}} </h4> 
+      <h3> Followers: {{followerCount}} </h3>
+      <h3> Following: {{followingCount}} </h3>
+      <img class="profilePagePic" src="{{profileUser.profilePicture.url}}">
+      {% if profileUser != request.user %}
+      {% if follows %}
+      <form action="{% url 'unfollow' followreceiver=profileUser %}" method="POST"> 
+          {% csrf_token %}
+          <input type="submit" class="follow-button Unfollow" value="Unfollow">
+      </form>
+      {% else %}
+      <form action="{% url 'follow' followreceiver=profileUser %}" method="POST"> 
+          {% csrf_token %}
+          <input type="submit" class="follow-button Follow" value="Follow">
+      </form>
+      {% endif %}
+
+      {% endif %}
+    </div>
+
     <div class="all-posts-container">
-
-        <h4> User: {{profileUser}} </h4> 
-        <h3> Followers: {{followerCount}} </h3>
-        <h3> Following: {{followingCount}} </h3>
-        
-        {% if profileUser != request.user %}
-        {% if follows %}
-        <form action="{% url 'unfollow' followreceiver=profileUser %}" method="POST"> 
-            {% csrf_token %}
-            <input type="submit" value="Unfollow">
-        </form>
-        {% else %}
-        <form action="{% url 'follow' followreceiver=profileUser %}" method="POST"> 
-            {% csrf_token %}
-            <input type="submit" value="Follow">
-        </form>
-        {% endif %}
-
-        {% endif %}
-
-
         {% for post in page_obj %}
         <div class="post-container"> 
             <img class="post-pic" src="{{post.creator.profilePicture.url}}">

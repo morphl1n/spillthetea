@@ -1,0 +1,45 @@
+.profile-info-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 100px;
+    h3, h4, img{
+        margin-top: 5px;
+    }
+}
+
+
+.follow-button{
+    all: unset;
+    margin-top: 10px;
+    padding: 10px;
+    font-weight: bold;
+    transition: 0.1s ease-in;
+    &:hover{
+        cursor: pointer;
+
+    }
+
+}
+
+.Unfollow{
+    background-color: rgba(255, 0, 0, 0.65);
+    
+    &:hover{
+        background-color: darken($color: #ff0000, $amount: 10%)
+    }
+
+}
+
+.Follow{
+    background-color: $main-color;
+    &:hover{
+        background-color: rgba($main-color, 0.65);
+    }
+}
+
+.profilePagePic{
+    width: 150px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
