@@ -5,7 +5,7 @@ This is mini social network project, built with python's Django framework, Vanil
 **[You can visit live site here](https://spillthetea.herokuapp.com/)**
 
 
-## Here are some key features of this project: 
+### Here are some key features of this project: 
 - Registration, login
 - Add posts
 - Like / Unlike posts
@@ -15,7 +15,7 @@ This is mini social network project, built with python's Django framework, Vanil
 - Edit and save your post
 - Change profile picture
 
-## Javascript usage:
+### Javascript usage:
 - Show/Hide password 
 ![Show/Hide](https://user-images.githubusercontent.com/95188330/217943853-57cce6d1-7a27-4365-8630-a46e884f26d8.png)
 - Fetching database to edit and save text of your post
@@ -24,8 +24,8 @@ This is mini social network project, built with python's Django framework, Vanil
 ![image](https://user-images.githubusercontent.com/95188330/217941453-8d27a323-5097-48f0-b249-d2ef3561571e.png)
 
 
-#### Models:
-## Unoredered
+
+### Models:
 - User model, with default abstractuser fields + imagefield for profile picture
 - Post model with creator(Foreign key to user), content and timestamp fields
 - Follow model with follower and follow receiver fields, both are foreignkeys to user. 
