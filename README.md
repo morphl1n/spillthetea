@@ -4,7 +4,7 @@ This is a mini social network project built with the Python Django framework, Va
 
 **[You can visit the live site here](https://spillthetea.herokuapp.com/)**
 
-### TThis project is designed using the Model-View-Controller (MVC) architectural pattern, which provides clear separation of responsibilities between the data model, user interface, and control logic. The project's code can be found on the "Master" branch of the repository.
+### TThis project is designed using the Model-View-Controller (MVC) architectural pattern, which provides clear separation of responsibilities between the data model, user interface, and control logic. The project's code can be found on the "master" branch of the repository.
 
 
 ### Here are some key features of this project: 
