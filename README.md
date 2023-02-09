@@ -17,7 +17,7 @@ This is mini social network project, built with python's Django framework, Vanil
 
 ## Javascript usage:
 - Show/Hide password 
-![Show/Hide](https://ibb.co/zZV6bww)
+![Show/Hide](https://user-images.githubusercontent.com/95188330/217943853-57cce6d1-7a27-4365-8630-a46e884f26d8.png)
 - Fetching database to edit and save text of your post
 ![Edit and Save](https://user-images.githubusercontent.com/95188330/217940991-50353683-da0d-4e3a-85fa-68c99fa8b596.png)
 - Updating Likes count and fetching that information to the database. Changes svg icon to blue variation 
