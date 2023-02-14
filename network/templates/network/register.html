@@ -1,0 +1,40 @@
+{% extends "network/layout.html" %}
+{% load static %}
+{% block script %}
+<script src="{% static 'network/register.js' %}" defer></script> 
+{% endblock %}
+{% block body %}
+<section class="register-section">
+    <div class="register-form">
+        <h2>Register</h2>
+
+        {% if message %}
+            <div>{{ message }}</div>
+        {% endif %}
+
+        <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            <div >
+                <input class="reg-username" autofocus type="text" name="username" placeholder="Username">
+            </div>
+            <div>
+                <input class="reg-email"  type="email" name="email" placeholder="Email Address">
+            </div>
+            <div class="container-reg-password">
+                <input class="reg-password"  type="password" name="password" placeholder="Password">
+                <button class="reg-show-pass" type="button">Show</button>
+            </div>
+            <div class="container-reg-password-conf">
+                <input class="reg-pass-conf" type="password" name="confirmation" placeholder="Confirm Password">
+                <button class="reg-show-conf-pass" type="button">Show</button>
+            </div>
+            <input class="reg-submit" type="submit" value="Join">
+        </form>
+
+        <div class="reg-question">
+            Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

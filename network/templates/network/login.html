@@ -1,0 +1,39 @@
+{% extends "network/layout.html" %}
+{% load static %}
+{% block script %}
+<script src="{% static 'network/login.js' %}" defer></script> 
+{% endblock %}
+
+{% block body %}
+<section class="login-section">
+    <div class="login-form"> 
+
+        <h2 class="login-text">Login</h2>
+
+        {% if message %}
+            <div class="login-error-message">{{ message }}</div>
+        {% endif %}
+
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <div>
+                <input class="username-input" autofocus  type="text" name="username" placeholder="Username">
+            </div>
+            <div class="password-input-container">
+                <input class="password-input" type="password" name="password" placeholder="Password">
+            </div>
+                <button class="show-pass" type="button">Show</button>
+            
+            <input class="login-btn" type="submit" value="Sign in">
+            
+        </form>
+        <div class="reg-question">
+        Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+        </div>
+    </div>
+    <div class="login-photo-container"> 
+        <img class="login-photo" src="{% static 'network/images/login-photo.png' %}" alt="your_alt_text">
+    </div>
+</section>
+
+{% endblock %}
