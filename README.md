@@ -2,7 +2,7 @@
 
 This is a mini social network project built with the Python Django framework, Vanilla JavaScript, Sass, and deployed on Heroku. The idea behind this project is to allow users to freely gossip and express their thoughts, whether they be stupid or smart. 
 
-**[You can visit the live site here](https://spillthetea.herokuapp.com/)**
+# **[You can visit the live site here](https://spillthetea.herokuapp.com/)**
 
 ### This project is designed using the Model-View-Controller (MVC) architectural pattern, which provides clear separation of responsibilities between the data model, user interface, and control logic. The project's code can be found on the "master" branch of the repository.
 
