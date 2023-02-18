@@ -16,6 +16,7 @@ This is a mini social network project built with the Python Django framework, Va
 - See posts only from the users you follow
 - Edit and save your post
 - Change profile picture
+- Pagination: involves displaying up to 10 posts per page, and any additional posts beyond that limit are placed on a new page.
 
 ### Thank you for your time! 
 
